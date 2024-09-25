@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Booking Details</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .container {
+             max-width: 600px;
+           
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #efecec;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+            
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .booking-details {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .booking-details p {
+            margin: 0;
+        }
+         
+
+        .ticket-details {
+            margin-top: 20px;
+            margin-left: 10px;
+        }
+        p{
+            padding: 5px;
+            margin: 2px;
+            font-size: 20px;
+
+        }
+        button {
+    width: 30%;
+    padding: 10px;
+    background: linear-gradient(135deg, #32d2e1, #a7dd1f);
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.11s;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #205c82, #d42ad1);
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upcoming Train Booking Details</h1>
+        <div class="booking-details">
+            <p><strong>Train Name:</strong>  <span th:text="${ticket.trainName}"></span></p>
+            <p><strong>Departure Time:</strong>  <span th:text="${ticket.stTime}"></span></p>
+            <p><strong>Passenger Name:</strong><span th:text="${ticket.firstName}"></span></p>
+
+            <p><strong>Coach Number:</strong> <span th:text="${ticket.coachNum}"></span></p>
+            <p><strong>Seat Number:</strong> <span th:text="${ticket.seatNum}"></span></p>
+            <p><strong>Booking ID:</strong> <span th:text="${ticket.pnr}"></span></p>
+        </div>
+        <div class="ticket-details">
+            <p><strong>Ticket Type:</strong> Your Ticket Type</p>
+            <p><strong>Price:</strong> <span th:text="${ticket.fair}"></span></p>
+            <p><strong>Source Station:</strong> <span th:text="${sour}"></span></p>
+            <p><strong>Destination Station:</strong> <span th:text="${dest}"></span></p>
+        </div>
+        <div class="input-container"><button><a th:href="@{'/mytickets/'+${ticket.pnr}+'/cancel'}">Cancel</a></button></div>
+        <div class="input-container"><button onclick="goBack()"><== Go Back</button></div>
+        <script>
+              function goBack() {
+            window.location.href = "/mytickets";
+        }
+
+        window.addEventListener('popstate', function (event) {
+            if (event.state && event.state.isNavigated) {
+                window.location.href = event.state.targetUrl;
+            }
+        });
+
+        window.addEventListener('load', function () {
+            history.replaceState({ isNavigated: false }, null, window.location.href);
+        });
+        </script>
+    </div>
+</body>
+</html>

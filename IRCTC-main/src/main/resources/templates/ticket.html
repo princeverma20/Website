@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ticket</title>
+    <style>
+        body{
+            background-color: #fefdfd;
+        }
+    .ticket-container {
+    background-color: rgba(243, 233, 233, 0.534);
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 0 50px rgba(69, 175, 7, 0.811);
+    text-align: center;
+    width: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+}
+
+.ticket-form h1 {
+    margin: 0;
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #09070e;
+}
+.ticket-form a:hover{
+ color:#30e257;
+}
+
+.input-container {
+    margin: 10px 0;
+    text-align:center;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    color: #353535;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #8a76ba;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+    font-weight:900; /* Apply bold font to input text */
+}
+
+button {
+    width: 50%;
+    padding: 10px;
+    background: linear-gradient(135deg, #32d2e1, #a7dd1f);
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.11s;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #205c82, #d42ad1);
+}
+
+/* Add hover effect for input fields */
+input:hover, input:focus {
+    background-color: #fffffff9;
+}
+select {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #0e010a;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight:bold;
+}
+
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;margin: 10px;padding: 10px;">Book Your Ticket</h1>
+     
+    <div class="ticket-container">
+        <form class="ticket-form" th:action="@{'/book'}" method="post" th:object="${ticket}">
+            <h1 style="margin: 10px;">Enter Your Details Here !</h1>
+            <select class="form-select" aria-label="Default select example" required th:field="*{cla}">
+<!--                <option selected>Select Class</option>-->
+                <option th:if="${ac1}" value="AC1">AC 1 Tier</option>
+                <option th:if="${ac2}" value="AC2">AC 2 Tier</option>
+                <option th:if="${ac3}" value="AC3">AC 3 Tier</option>
+                <option th:if="${slp}" value="SLP">Sleeper</option>
+                <option th:if="${gen}" value="GEN">General</option>
+            </select>
+            <div class="input-container">
+                <label for="firstname">First Name:</label>
+                <input type="text" id="firstname" name="firstname" required th:field="*{firstName}">
+            </div>
+            <div class="input-container">
+                <label for="lastname">Last Name:</label>
+                <input type="text" id="lastname" name="lastname" required th:field="*{lastName}">
+            </div>
+
+            <div class="input-container">
+                <label for="age">Age:</label>
+                <input type="text" id="age" name="age" required th:field="*{age}">
+            </div>
+            <input type="hidden" th:field="*{trainId}" th:value="${id}" th:default="${id}">
+            <input type="hidden" th:field="*{time}" th:value="${time}" th:default="${time}">
+            <input type="hidden" th:field="*{st1}" th:value="${st1}" th:default="${st1}">
+            <input type="hidden" th:field="*{st2}" th:value="${st2}" th:default="${st2}">
+        <div class="input-container"> <button type="submit">Book</button></div>
+
+
+        </form>
+    </div>
+</body>
+</html>

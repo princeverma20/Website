@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Booking Details</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #d0d6d4;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #d0d6d4;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .booking-details {
+            border: 1px solid #101211;
+            border-radius: 5px;
+            padding: 20px;
+            margin-top: 20px;
+            background:linear-gradient(rgba(148, 97, 193, 0.699) ,rgba(141, 197, 132, 0.826) );
+        }
+
+        .booking-details p {
+            margin: 0;
+        }
+
+        .ticket-details {
+            margin-top: 20px;
+        }
+        p{
+            padding: 5px;
+            margin: 5px;
+            font-size: 24px;
+        }
+        button {
+    width: 30%;
+    padding: 10px;
+    background: linear-gradient(135deg, #32d2e1, #a7dd1f);
+    color: #000000;
+    border:2px solid black;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.11s;
+    margin: 5px;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #205c82, #d42ad1);
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upcoming Train Booking Details</h1>
+        <tr th:each="entry : ${tickets}">
+        <div class="booking-details">
+            <p><strong>Train Name:</strong> <span th:text="${entry.trainName}"></span></p>
+            <p><strong>Departure Date:</strong><span th:text="${entry.stTime}" ></span></p>
+            <p><strong>PNR No:</strong><span th:text="${entry.pnr}" ></span></p>
+            <p><strong>Ticket Type:</strong><span th:text="${entry.cla}" ></span></p>
+            <!-- Add more ticket details as needed -->
+            <div class="input-container"> <button><a th:href="@{'/mytickets/' + ${entry.pnr}}">Ticket ==></a> </button></div>
+        </div>
+    </div>
+</body>
+</html>
